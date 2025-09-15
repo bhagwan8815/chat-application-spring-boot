@@ -77,10 +77,11 @@ public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
 @MessageMapping("/chat.sendPrivateMessage")
 public void sendPrivateMessage(@Payload ChatMessage chatMessage , SimpMessageHeaderAccessor headerAccessor){
 
-    if(userService.userExits(chatMessage.getSender() ) && userService.userExits(chatMessage.getRecepient())){
+    if(userService.userExists(chatMessage.getSender() ) && userService.userExists(chatMessage.getRecepient())){
         if(chatMessage.getTimestamp()==null){
             chatMessage.setTimestamp(LocalDateTime.now());
         }
+        chatMessage.setType(ChatMessage.MessageType.PRIVATE_MESSAGE);
 
         if(chatMessage.getContent()==null){
             chatMessage.setContent("");
