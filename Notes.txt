@@ -1,0 +1,4 @@
+Flow when an http request comes after the successful login of the user ---->>>
+
+
+SecurityConfig → JwtAuthenticationFilter → JwtService → CustomUserDetails → UserRepository → Controller (e.g. ChatController) → Service (e.g. UserService) → Repository → Response
