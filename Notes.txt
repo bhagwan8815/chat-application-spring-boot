@@ -2,3 +2,38 @@ Flow when an http request comes after the successful login of the user ---->>>
 
 
 SecurityConfig → JwtAuthenticationFilter → JwtService → CustomUserDetails → UserRepository → Controller (e.g. ChatController) → Service (e.g. UserService) → Repository → Response
+
+
+
+
+
+
+
+
+***************** H2 database *************
+****************                **********
+
+H2 Database is a lightweight, fast, open-source relational database management system (RDBMS) written in Java.
+
+It is often used in Java applications (like Spring Boot projects) for development, testing, and sometimes even in production for lightweight use cases.
+
+Key Features of H2 Database:
+
+Written in Java – runs anywhere Java runs.
+
+Lightweight & Fast – small size (~2 MB JAR) and quick startup.
+
+Modes of Operation:
+
+Embedded Mode – database runs inside the same JVM as the application.
+👉 Common for development/testing (no separate DB server needed).
+
+Server Mode – can run as a standalone database server and allow multiple clients to connect.
+
+In-Memory Mode – data is stored only in RAM (gets lost when the app stops).
+
+SQL Support – supports standard SQL and many features of larger databases.
+
+Browser Console – comes with a web-based console for running SQL queries.
+
+Integration – works smoothly with frameworks like Spring Boot, Hibernate, JDBC, JPA.

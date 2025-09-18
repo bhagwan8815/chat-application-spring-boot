@@ -10,10 +10,11 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
-@Controller
+@RestController
 public class ChatController {
 
     @Autowired
@@ -77,7 +78,7 @@ public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
 @MessageMapping("/chat.sendPrivateMessage")
 public void sendPrivateMessage(@Payload ChatMessage chatMessage , SimpMessageHeaderAccessor headerAccessor){
 
-    if(userService.userExists(chatMessage.getSender() ) && userService.userExists(chatMessage.getRecepient())){
+    if(userService.userExists(chatMessage.getSender() ) && userService.userExists(chatMessage.getRecipient())){
         if(chatMessage.getTimestamp()==null){
             chatMessage.setTimestamp(LocalDateTime.now());
         }
@@ -91,7 +92,7 @@ public void sendPrivateMessage(@Payload ChatMessage chatMessage , SimpMessageHea
         System.out.println("Message saved successfully with id :" + savedMessage.getId());
 
        try {
-           String recepientDestination = "/user/"+chatMessage.getRecepient()+"/queue/private";
+           String recepientDestination = "/user/"+chatMessage.getRecipient()+"/queue/private";
            System.out.println("sending message to recepient destination " + recepientDestination);
            messagingTemplate.convertAndSend(recepientDestination , savedMessage);
 
@@ -104,7 +105,7 @@ public void sendPrivateMessage(@Payload ChatMessage chatMessage , SimpMessageHea
        }
 
     }else{
-        System.out.println("Error:Sender " + chatMessage.getSender() + " or recepient " + chatMessage.getRecepient()+" does not not exits");
+        System.out.println("Error:Sender " + chatMessage.getSender() + " or recepient " + chatMessage.getRecipient()+" does not not exits");
     }
 
 
